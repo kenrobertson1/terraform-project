@@ -17,7 +17,7 @@ resource "aws_ecr_repository" "ken-repo" {
   image_scanning_configuration {
     scan_on_push = true
   }
-} 
+}
 
 resource "aws_elastic_beanstalk_application" "ken_app" {
   name        = "ken-task-listing-app"
@@ -37,7 +37,7 @@ resource "aws_elastic_beanstalk_environment" "ken_app_environment" {
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
-    name = "EC2KeyName"
-    value = "kenkeypair"
+    name      = "EC2KeyName"
+    value     = "kenkeypair"
   }
 }
