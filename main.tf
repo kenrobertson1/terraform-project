@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-2"
+  region  = "eu-west-2"
   profile = "kens-aws"
 }
 
@@ -18,4 +18,4 @@ resource "aws_ecr_repository" "ken-repo" {
   image_scanning_configuration {
     scan_on_push = true
   }
-}
+} 
