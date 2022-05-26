@@ -24,6 +24,11 @@ resource "aws_elastic_beanstalk_application" "ken_app" {
   description = "Task listing app"
 }
 
+resource "aws_iam_instance_profile" "ken_app_ec2_instance_profile" {
+  name = "ken-task-listing-app-ec2-instance-profile"
+  role = aws_iam_role.ken_app_ec2_role.name
+}
+
 resource "aws_elastic_beanstalk_environment" "ken_app_environment" {
   name                = "ken-task-listing-app-environment"
   application         = aws_elastic_beanstalk_application.ken_app.name
