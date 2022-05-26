@@ -5,21 +5,21 @@ on:
       - main
     types: [closed]
 
-jobs:
-  terraform:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
-    steps:
+  jobs:
+    terraform:
+      name: 'Terraform'
+      runs-on: ubuntu-latest
+      steps:
 
-    - name: Checkout
-    uses: actions/checkout@v3
+      - name: Checkout
+      uses: actions/checkout@v3
 
-    - name: Setup Terraform
-    uses: hashicorp/setup-terraform@v1
-    with:
-      # terraform_version: 0.13.0
-      cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        # terraform_version: 0.13.0
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-    - name: Terraform Format
-    id: fmt
-    run: terraform fmt -check
+      - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check
