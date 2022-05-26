@@ -31,6 +31,20 @@ resource "aws_iam_instance_profile" "ken_app_ec2_instance_profile" {
 
 resource "aws_iam_role" "ken_app_ec2_role" {
   name = "ken-task-listing-app-ec2-instance-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+        Effect = "Allow"
+        Sid    = ""
+      }
+    ]
+  })
 }
 
 resource "aws_elastic_beanstalk_environment" "ken_app_environment" {
