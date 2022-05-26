@@ -1,18 +1,17 @@
 provider "aws" {
-  region     = "eu-west-2"
-  access_key = "my-access-key"
-  secret_key = "my-secret-key"
+  region = "eu-west-2"
+  profile = "kens-aws"
 }
 
 terraform {
   backend "s3" {
-    bucket = "terraform-ken"
+    bucket = "ken-terraform"
     key    = "path/to/my/key"
     region = "eu-west-2"
   }
 }
 
-resource "aws_ecr_repository" "foo" {
+resource "aws_ecr_repository" "kens-repo" {
   name                 = "bar"
   image_tag_mutability = "MUTABLE"
 
