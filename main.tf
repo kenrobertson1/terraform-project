@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "ken-terraform"
+    bucket = "kens-terraform"
     key    = "path/to/my/key"
     region = "eu-west-2"
   }
