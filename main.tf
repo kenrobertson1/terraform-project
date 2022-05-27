@@ -10,6 +10,11 @@ terraform {
   }
 }
 
+resource "aws_s3_bucket" "docker_bucket" {
+  bucket = "kendockerapp"
+  acl    = "private"
+}
+
 resource "aws_ecr_repository" "ken-repo" {
   name                 = "ken-terraform-repo"
   image_tag_mutability = "MUTABLE"
@@ -87,4 +92,17 @@ resource "aws_elastic_beanstalk_environment" "ken_app_environment" {
     name      = "EC2KeyName"
     value     = "kenkeypair"
   }
+}
+
+resource "aws_db_instance" "ken_rds_app" {
+  allocated_storage    = 10
+  engine               = "postgres"
+  engine_version       = "13.3"
+  instance_class       = "db.m6g.large"
+  identifier           = "ken-app-prod"
+  name                 = "ken-app-database-name"
+  username             = "root"
+  password             = "password"
+  skip_final_snapshot  = true
+  publicly_accessible = true
 }
