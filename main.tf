@@ -47,6 +47,11 @@ resource "aws_iam_policy_attachment" "ken_app_ec2_container_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
 }
 
+resource "aws_iam_role_policy_attachment" "ken_app_role_policy_attachment" {
+  role       = aws_iam_role.ken_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 resource "aws_iam_role" "ken_app_ec2_role" {
   name = "ken-task-listing-app-ec2-instance-role"
 
