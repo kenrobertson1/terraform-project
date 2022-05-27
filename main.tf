@@ -10,7 +10,7 @@ terraform {
   }
 }
 
-resource "aws_s3_bucket" "docker_bucket" {
+resource "aws_s3_bucket_acl" "docker_bucket" {
   bucket = "kendockerapp"
   acl    = "private"
 }
@@ -100,9 +100,9 @@ resource "aws_db_instance" "ken_rds_app" {
   engine_version      = "13.3"
   instance_class      = "db.m6g.large"
   identifier          = "ken-app-prod"
-  name                = "ken-app-database-name"
+  name                = "kendb"
   username            = "root"
-  password            = "password"
+  password            = "password123"
   skip_final_snapshot = true
   publicly_accessible = true
 }
