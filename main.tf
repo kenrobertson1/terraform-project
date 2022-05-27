@@ -29,6 +29,24 @@ resource "aws_iam_instance_profile" "ken_app_ec2_instance_profile" {
   role = aws_iam_role.ken_app_ec2_role.name
 }
 
+resource "aws_iam_policy_attachment" "ken_app_ec2_worker_policy" {
+  name       = "ken-elastic-beanstalk-ec2-worker-policy"
+  roles      = ["${aws_iam_role.ken_app_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+}
+
+resource "aws_iam_policy_attachment" "ken_app_ec2_web_policy" {
+  name       = "ken-elastic-beanstalk-ec2-web-policy"
+  roles      = ["${aws_iam_role.ken_app_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+}
+
+resource "aws_iam_policy_attachment" "ken_app_ec2_container_policy" {
+  name       = "ken-elastic-beanstalk-ec2-container-policy"
+  roles      = ["${aws_iam_role.ken_app_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+}
+
 resource "aws_iam_role" "ken_app_ec2_role" {
   name = "ken-task-listing-app-ec2-instance-role"
 
@@ -45,12 +63,13 @@ resource "aws_iam_role" "ken_app_ec2_role" {
       }
     ]
   })
+
 }
 
 resource "aws_elastic_beanstalk_environment" "ken_app_environment" {
   name                = "ken-task-listing-app-environment"
   application         = aws_elastic_beanstalk_application.ken_app.name
-  solution_stack_name = "64bit Amazon Linux 2 v3.4.5 running Docker"
+  solution_stack_name = "64bit Amazon Linux 2 v3.4.16 running Docker"
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
