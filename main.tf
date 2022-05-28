@@ -15,6 +15,11 @@ resource "aws_s3_bucket_acl" "docker_bucket" {
   acl    = "private"
 }
 
+resource "aws_s3_bucket_acl" "docker_bucket" {
+  bucket = "kendocker2"
+  acl    = "private"
+}
+
 resource "aws_ecr_repository" "ken-repo" {
   name                 = "ken-terraform-repo"
   image_tag_mutability = "MUTABLE"
