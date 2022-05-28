@@ -15,7 +15,7 @@ resource "aws_s3_bucket_acl" "docker_bucket" {
   acl    = "private"
 }
 
-resource "aws_s3_bucket_acl" "docker_bucket" {
+resource "aws_s3_bucket_acl" "docker_bucket2" {
   bucket = "kendocker2"
   acl    = "private"
 }
