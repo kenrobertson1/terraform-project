@@ -15,6 +15,11 @@ resource "aws_s3_bucket_acl" "docker_bucket" {
   acl    = "private"
 }
 
+resource "aws_s3_bucket_acl" "docker_bucket2" {
+  bucket = "kendocker2"
+  acl    = "private"
+}
+
 resource "aws_ecr_repository" "ken-repo" {
   name                 = "ken-terraform-repo"
   image_tag_mutability = "MUTABLE"
@@ -100,7 +105,7 @@ resource "aws_db_instance" "ken_rds_app" {
   engine_version      = "13.3"
   instance_class      = "db.m6g.large"
   identifier          = "ken-app-prod"
-  name                = "kendb"
+  db_name             = "kendb"
   username            = "root"
   password            = "password123"
   skip_final_snapshot = true
